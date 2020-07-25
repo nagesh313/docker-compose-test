@@ -1,6 +1,10 @@
 sudo: required
 services:
   - docker
+script: 
+  - docker build -t post
+  - heroku container:login
+  - heroku container:push post
 deploy:
   provider: script
   script: 
