@@ -1,0 +1,11 @@
+sudo: required
+services:
+  - docker
+deploy:
+  provider: script
+  script: 
+    - docker build -t post
+    - heroku container:login
+    - heroku container:push post
+  on:
+    branch: master
