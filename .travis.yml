@@ -5,6 +5,8 @@ script:
   - docker build -t test-jira-app .    
   - docker ps 
   - docker images ls
+  - docker login --username=$REGISTRY_USER --password=$REGISTRY_PASS registry.heroku.com
+  - heroku container:push test-jira-app --app quiet-beach-04344
 deploy:
  provider: heroku
  script:
