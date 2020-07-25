@@ -2,13 +2,13 @@ sudo: required
 services:
   - docker
 script: 
-  - docker build .
+  - docker build -t post .
   - heroku container:login
   - heroku container:push post
 deploy:
   provider: script
   script: 
-    - docker build -t post
+    - docker build -t post .
     - heroku container:login
     - heroku container:push post --app quiet-beach-04344
   on:
