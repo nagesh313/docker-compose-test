@@ -16,5 +16,5 @@ deploy:
   - heroku container:login
   - heroku container:push test-jira-app
   - heroku container:release test-jira-app
- api-key: $HEROKU_API_KEY
+ api_key: $HEROKU_API_KEY
  app: test-jira-app
