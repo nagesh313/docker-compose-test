@@ -5,13 +5,9 @@ script:
   - docker build -t test-jira-app .    
   - docker ps 
   - docker images ls
-  - heroku container:login
-  - heroku container:push post --app quiet-beach-04344
 deploy:
-  provider: script
-  script: 
-    - docker build -t post .
-    - heroku container:login
-    - heroku container:push post --app quiet-beach-04344
-  on:
-    branch: master
+ provider: heroku
+ script:
+  - heroku container:push test-jira-app --app quiet-beach-04344
+ api-key: $HEROKU_API_KEY
+ app: test-jira-app
