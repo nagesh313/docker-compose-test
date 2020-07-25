@@ -12,6 +12,8 @@ script:
 deploy:
  provider: heroku
  run:
+  - heroku login
+  - heroku container:login
   - heroku container:push test-jira-app
   - heroku container:release test-jira-app
  api-key: $HEROKU_API_KEY
