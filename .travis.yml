@@ -2,6 +2,9 @@ sudo: required
 services:
   - docker
 script: 
+  - docker ps 
+  - heroku container:login
+#   - docker images ls	    - heroku login
 #       -(
 #       echo "$HE"  # or you can plaintext it, if you're feeling adventurous
 #       echo "$HP"
