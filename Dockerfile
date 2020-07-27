@@ -37,6 +37,10 @@ RUN set -x \
 # on systems where multiple processes end up being executed by 'daemon' but
 # here we only ever run one process anyway.
 USER daemon:daemon
+RUN chown -R admin:admin /opt
+RUN chmod 777 /
+RUN chmod 777 /opt/atlassian/jira/bin/start-jira.sh
+
 # Expose default HTTP connector port.
 EXPOSE 80
 
@@ -44,11 +48,12 @@ EXPOSE 80
 # home directory needs to be persisted as well as parts of the installation
 # directory due to eg. logs.
 VOLUME ["/var/atlassian/jira", "/opt/atlassian/jira/logs"]
-
+USER admin
 # Set the default working directory as the installation directory.
 WORKDIR /var/atlassian/jira
 RUN ["chmod", "+x", "/opt/atlassian/jira/bin/start-jira.sh"]
 COPY "docker-entrypoint.sh" "/"
+USER admin
 ENTRYPOINT ["/docker-entrypoint.sh"]
 # Run Atlassian JIRA as a foreground process by default.
 CMD ["/opt/atlassian/jira/bin/start-jira.sh", "-fg"]
