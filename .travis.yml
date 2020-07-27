@@ -22,10 +22,10 @@ script:
 # deploy:
 #  provider: heroku
 #  run:
-     -(
-      echo "$HE"  # or you can plaintext it, if you're feeling adventurous
-      echo "$HP"
-        ) | heroku login
+#      -(
+#       echo "$HE"  # or you can plaintext it, if you're feeling adventurous
+#       echo "$HP"
+#         ) | heroku login
 #   - heroku container:login
 #   - heroku container:push test-jira-app
 #   - heroku container:release test-jira-app
