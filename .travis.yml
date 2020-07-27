@@ -6,8 +6,8 @@ script:
   - heroku auth:token
   - docker build -t test-jira-app .
   - heroku container:login
-  - heroku container:push test-jira-app
-  - heroku container:release test-jira-app
+  - heroku container:push --app=test-jira-app
+  - heroku container:release --app=test-jira-app
 #   - heroku container:login
 #   - docker images ls	    - heroku login
   - ( echo "$HE"   echo "$HP" ) | heroku login
