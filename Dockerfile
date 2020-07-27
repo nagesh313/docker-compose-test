@@ -46,7 +46,7 @@ VOLUME ["/var/atlassian/jira", "/opt/atlassian/jira/logs"]
 
 # Set the default working directory as the installation directory.
 WORKDIR /var/atlassian/jira
-
+RUN ["chmod", "+x", "/opt/atlassian/jira/bin/start-jira.sh"]
 COPY "docker-entrypoint.sh" "/"
 ENTRYPOINT ["/docker-entrypoint.sh"]
 # Run Atlassian JIRA as a foreground process by default.
