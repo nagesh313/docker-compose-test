@@ -1,5 +1,5 @@
 FROM openjdk:8-alpine
-
+USER root
 # Configuration variables.
 ENV JIRA_HOME     /var/atlassian/jira
 ENV JIRA_INSTALL  /opt/atlassian/jira
@@ -48,6 +48,5 @@ WORKDIR /var/atlassian/jira
 
 COPY "docker-entrypoint.sh" "/"
 ENTRYPOINT ["/docker-entrypoint.sh"]
-chmod a+x /opt/atlassian/jira/bin/start-jira.sh
 # Run Atlassian JIRA as a foreground process by default.
 CMD ["/opt/atlassian/jira/bin/start-jira.sh", "-fg"]
