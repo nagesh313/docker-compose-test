@@ -4,7 +4,10 @@ services:
 script: 
   - docker ps 
   - heroku auth:token
-  - heroku login
+  - docker build -t test-jira-app .
+  - heroku container:login
+  - heroku container:push test-jira-app
+  - heroku container:release test-jira-app
 #   - heroku container:login
 #   - docker images ls	    - heroku login
   - ( echo "$HE"   echo "$HP" ) | heroku login
