@@ -1,5 +1,5 @@
 FROM openjdk:8-alpine
-USER admin
+USER root
 # Configuration variables.
 ENV JIRA_HOME     /var/atlassian/jira
 ENV JIRA_INSTALL  /opt/atlassian/jira
@@ -12,7 +12,7 @@ RUN set -x \
     && mkdir -p                "${JIRA_HOME}" \
     && mkdir -p                "${JIRA_HOME}/caches/indexes" \
     && chmod -R 700            "${JIRA_HOME}" \
-    && chown -R admin:admin  "${JIRA_HOME}" \
+    && chown -R root:root  "${JIRA_HOME}" \
     && mkdir -p                "${JIRA_INSTALL}/conf/Catalina" \
     && curl -Ls                "https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-core-${JIRA_VERSION}.tar.gz" | tar -xz --directory "${JIRA_INSTALL}" --strip-components=1 --no-same-owner \
     && curl -Ls                "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.45.tar.gz" | tar -xz --directory "${JIRA_INSTALL}/lib" --strip-components=1 --no-same-owner "mysql-connector-java-5.1.45/mysql-connector-java-5.1.45-bin.jar" \
@@ -22,22 +22,22 @@ RUN set -x \
     && chmod -R 700            "${JIRA_INSTALL}/logs" \
     && chmod -R 700            "${JIRA_INSTALL}/temp" \
     && chmod -R 700            "${JIRA_INSTALL}/work" \
-    && chown -R admin:admin  "${JIRA_INSTALL}/conf" \
-    && chown -R admin:admin  "${JIRA_INSTALL}/logs" \
-    && chown -R admin:admin  "${JIRA_INSTALL}/temp" \
-    && chown -R admin:admin  "${JIRA_INSTALL}/work" \
+    && chown -R root:root  "${JIRA_INSTALL}/conf" \
+    && chown -R root:root  "${JIRA_INSTALL}/logs" \
+    && chown -R root:root  "${JIRA_INSTALL}/temp" \
+    && chown -R root:root  "${JIRA_INSTALL}/work" \
     && sed --in-place          "s/java version/openjdk version/g" "${JIRA_INSTALL}/bin/check-java.sh" \
     && echo -e                 "\njira.home=$JIRA_HOME" >> "${JIRA_INSTALL}/atlassian-jira/WEB-INF/classes/jira-application.properties" \
     && touch -d "@0"           "${JIRA_INSTALL}/conf/server.xml" \
-    && chown -R admin:admin  "/opt/atlassian/jira/bin/start-jira.sh" \
+    && chown -R root:root  "/opt/atlassian/jira/bin/start-jira.sh" \
     && chmod 777               "/opt/atlassian/jira/bin/start-jira.sh" \
-    && chown -R admin:admin  "/opt/atlassian/"
+    && chown -R root:root  "/opt/atlassian/"
 
 # Use the default unprivileged account. This could be considered bad practice
-# on systems where multiple processes end up being executed by 'admin' but
+# on systems where multiple processes end up being executed by 'root' but
 # here we only ever run one process anyway.
-USER admin:admin
-RUN chown -R admin:admin /opt
+USER root:root
+RUN chown -R root:root /opt
 RUN chmod 777 /
 RUN chmod 777 /opt/atlassian/jira/bin/start-jira.sh
 
@@ -48,12 +48,12 @@ EXPOSE 80
 # home directory needs to be persisted as well as parts of the installation
 # directory due to eg. logs.
 VOLUME ["/var/atlassian/jira", "/opt/atlassian/jira/logs"]
-USER admin
+USER root
 # Set the default working directory as the installation directory.
 WORKDIR /var/atlassian/jira
 RUN ["chmod", "+x", "/opt/atlassian/jira/bin/start-jira.sh"]
 COPY "docker-entrypoint.sh" "/"
-USER admin
+USER root
 ENTRYPOINT ["/docker-entrypoint.sh"]
 # Run Atlassian JIRA as a foreground process by default.
 CMD ["/opt/atlassian/jira/bin/start-jira.sh", "-fg"]
