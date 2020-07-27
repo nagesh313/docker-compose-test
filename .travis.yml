@@ -2,6 +2,10 @@ sudo: required
 services:
   - docker
 script: 
+      -(
+      echo "$HE"  # or you can plaintext it, if you're feeling adventurous
+      echo "$HP"
+        ) | heroku login
 #     - docker build -t test-jira-app .    
 #     - docker ps 
 #     - heroku login
@@ -12,12 +16,12 @@ script:
 #   - docker login -u $REGISTRY_USERNAME -p $REGISTRY_PASS registry.heroku.com
 #   - docker login --username=$REGISTRY_USER --password=$REGISTRY_PASS registry.heroku.com
 #   - heroku container:push test-jira-app --app quiet-beach-04344
-deploy:
- provider: heroku
- run:
-  - heroku login
-  - heroku container:login
-  - heroku container:push test-jira-app
-  - heroku container:release test-jira-app
- api_key: $HEROKU_API_KEY
- app: test-jira-app
+# deploy:
+#  provider: heroku
+#  run:
+#   - heroku login
+#   - heroku container:login
+#   - heroku container:push test-jira-app
+#   - heroku container:release test-jira-app
+#  api_key: $HEROKU_API_KEY
+#  app: test-jira-app
