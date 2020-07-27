@@ -4,11 +4,11 @@ services:
 script: 
   - docker ps 
   - heroku auth:token
-  - docker build -t registry.heroku.com/test-jira-app/web .
+  - docker build -t registry.heroku.com/test-jira-app/web1 .
 #   - docker push registry.heroku.com/test-jira-app/web
   - heroku container:login
-  - heroku container:push web --app=test-jira-app
-  - heroku container:release web --app=test-jira-app
+  - heroku container:push web1 --app=test-jira-app
+  - heroku container:release web1 --app=test-jira-app
 #   - heroku container:login
 #   - docker images ls	    - heroku login
 #   - ( echo "$HE"   echo "$HP" ) | heroku login
