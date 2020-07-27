@@ -5,7 +5,7 @@ script:
   - docker ps 
 #   - heroku container:login
 #   - docker images ls	    - heroku login
-  -( echo "$HE"   echo "$HP" ) | heroku login
+#   -( echo "$HE"   echo "$HP" ) | heroku login
 #     - docker build -t test-jira-app .    
 #     - docker ps 
 #     - heroku login
