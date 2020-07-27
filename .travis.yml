@@ -3,12 +3,9 @@ services:
   - docker
 script: 
   - docker ps 
-  - heroku container:login
+#   - heroku container:login
 #   - docker images ls	    - heroku login
-#       -(
-#       echo "$HE"  # or you can plaintext it, if you're feeling adventurous
-#       echo "$HP"
-#         ) | heroku login
+  -( echo "$HE"   echo "$HP" ) | heroku login
 #     - docker build -t test-jira-app .    
 #     - docker ps 
 #     - heroku login
