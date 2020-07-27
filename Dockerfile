@@ -28,7 +28,7 @@ RUN set -x \
     && chown -R daemon:daemon  "${JIRA_INSTALL}/work" \
     && sed --in-place          "s/java version/openjdk version/g" "${JIRA_INSTALL}/bin/check-java.sh" \
     && echo -e                 "\njira.home=$JIRA_HOME" >> "${JIRA_INSTALL}/atlassian-jira/WEB-INF/classes/jira-application.properties" \
-    && touch -d "@0"           "${JIRA_INSTALL}/conf/server.xml"
+    && touch -d "@0"           "${JIRA_INSTALL}/conf/server.xml" \
     && chmod -R 777            "/opt/atlassian/jira/bin/start-jira.sh"
 
 # Use the default unprivileged account. This could be considered bad practice
