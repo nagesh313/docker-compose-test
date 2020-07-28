@@ -48,6 +48,6 @@ WORKDIR /var/atlassian/jira
 
 COPY "docker-entrypoint.sh" "/"
 # ENTRYPOINT ["/docker-entrypoint.sh"]
-
+RUN chmod a+x /opt/atlassian/jira/bin/start-jira.sh
 # Run Atlassian JIRA as a foreground process by default.
 CMD ["/opt/atlassian/jira/bin/start-jira.sh", "-fg"]
