@@ -1,5 +1,5 @@
 FROM openjdk:8-alpine
-
+USER root
 # Configuration variables.
 ENV JIRA_HOME     /var/atlassian/jira
 ENV JIRA_INSTALL  /opt/atlassian/jira
