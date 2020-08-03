@@ -33,10 +33,10 @@ RUN set -x \
 # Use the default unprivileged account. This could be considered bad practice
 # on systems where multiple processes end up being executed by 'daemon' but
 # here we only ever run one process anyway.
-USER daemon:daemon
+
 
 # Expose default HTTP connector port.
-EXPOSE 8080
+EXPOSE 80
 
 # Set volume mount points for installation and home directory. Changes to the
 # home directory needs to be persisted as well as parts of the installation
@@ -51,3 +51,4 @@ COPY "docker-entrypoint.sh" "/"
 RUN chmod a+x /opt/atlassian/jira/bin/start-jira.sh
 # Run Atlassian JIRA as a foreground process by default.
 CMD ["/opt/atlassian/jira/bin/start-jira.sh", "-fg"]
+USER daemon:daemon
